@@ -14,4 +14,4 @@ The principles behind this movie recommendation model can be applied to various 
 By leveraging the power of **Machine Learning**, businesses can create personalized experiences that increase customer satisfaction and drive engagement. 🌟
 
 ## 🌐 View:
-[Click here](https://predict-models-additional-employee.streamlit.app/).
+[Click here](https://recommendation-model.streamlit.app/).
