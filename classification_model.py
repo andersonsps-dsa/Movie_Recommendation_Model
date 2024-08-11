@@ -17,7 +17,6 @@ with col1:
     def filter_titles(input_text, titles_list):
         filtered_titles = [title for title in titles_list if input_text.lower() in title.lower()]
         return sorted(filtered_titles)
-
     user_input = st.text_input('Enter a movie title to view suggestions:')
     if user_input:
         suggestions = filter_titles(user_input, movie_titles)
@@ -30,15 +29,8 @@ with col1:
 
 with col2:
     if user_input and suggestions:
-        selected_movie = suggestions[0]        
-        try:
-            with open(f'{selected_movie}_neighbors.pkl', 'rb') as file:
-                distances, neighbors = pickle.load(file)
-        except FileNotFoundError:
-            from data import save_neighbors
-            save_neighbors(selected_movie)
-            with open(f'{selected_movie}_neighbors.pkl', 'rb') as file:
-                distances, neighbors = pickle.load(file)
+        selected_movie = suggestions[0]
+        distances, neighbors = model_.kneighbors(movie_piv.filter(items=[selected_movie], axis=0).values.reshape(1, -1))
         st.write(f'Similar movies to "{selected_movie}":')
         for i in range(len(neighbors[0])):
             suggestion = movie_piv.index[neighbors[0][i]]
